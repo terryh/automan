@@ -30,8 +30,8 @@ import comtypes
 app_realpath = os.path.realpath(sys.argv[0])
 app_dir = os.path.dirname(app_realpath)
 
-__version__ = 'V0.2 BETA'
-__DEAD__ = u"201212"
+__version__ = 'V0.3 BETA'
+__DEAD__ = u"201312"
 
 re_dead = re.compile("[0-9]+")
 def loadpickle(datafile=""):
@@ -87,9 +87,13 @@ def gethts():
 def getcon():
     progID=""
     try:  
-        # get AtiveX Control
+        # try version 1 OCX api
         cc.GetModule( ('{8E4A0C4A-9B62-41D7-B99A-2B48F81D744A}', 1, 0) )
         progID = 'SGTPOCXAPI.SgtpOcxApiCtrl.1'
+    except WindowsError:
+        # try version 2 OCX api
+        cc.GetModule( ('{D10B2D9E-71D1-49AC-8919-FF5E122E2172}', 2, 0) )
+        progID = 'SGTPOCXAPI.SgtpOcxApiCtrl.2'
     except:
         pass    
     return progID
@@ -756,6 +760,7 @@ class FF(MyFrame):
         self.loginfo(u"軟體使用期限%s"% (__DEAD__))
         self.loginfo(u"目前未支援下國外商品")
         if progID:
+            self.loginfo(getcon())
             self.ocx = AxWindow(self,  size=wx.Size(0,0) )
             self.ocxSizer.Add( self.ocx, 0, wx.ALL|wx.EXPAND, 5 )
             self.con = self.ocx.ctrl
@@ -880,7 +885,7 @@ class FF(MyFrame):
         info = wx.AboutDialogInfo()
         info.Name = u"AUTOMAN 康和日盛下單機"
         info.Version = __version__
-        info.Copyright = u"(C) 2010 TerryH"
+        info.Copyright = u"(C) 2011 TerryH"
         info.Description = wordwrap(
             u"此下單機可以下康合及日盛的期貨單，"
             u"目前未支援下國外商品，"
@@ -914,7 +919,12 @@ class FF(MyFrame):
         certpass = self.certpass.GetValue()
 
         if self.con and username and password and cert and certpass:
-            res = self.con.Login(username,password,"")
+            res = ''
+            try:
+                res = self.con.Login(username,password,"")
+            except:
+                pass
+
             self.loginfo(u"康合API登入...")
             if res[:2] == u"OK":
                 self.con.CertSign = 1
@@ -930,7 +940,7 @@ class FF(MyFrame):
                 self.loginfo(res)
 
         else:
-            self.loginfo(u"康和登入資料不完整，未登入")
+            self.loginfo(u"康和登入資料不完整或是分析OCX API 錯誤，未登入")
             
     def conlogout(self):
 
