@@ -760,7 +760,7 @@ class FF(MyFrame):
         self.loginfo(u"軟體使用期限%s"% (__DEAD__))
         self.loginfo(u"目前未支援下國外商品")
         if progID:
-            self.loginfo(getcon())
+            self.loginfo(u"康和 OCX版本 "+getcon())
             self.ocx = AxWindow(self,  size=wx.Size(0,0) )
             self.ocxSizer.Add( self.ocx, 0, wx.ALL|wx.EXPAND, 5 )
             self.con = self.ocx.ctrl
