@@ -100,7 +100,7 @@ def getcon():
     except WindowsError:
         pass
     try:
-        from comtypes.gen import SGTPOCXAPILib
+        from comtypes.gen import SGTPOCXAPILib # incase py2exe won't compile comtypes pyc
     except:
         progID=""
     
