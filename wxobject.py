@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*- 
 
 ###########################################################################
-## Python code generated with wxFormBuilder (version Dec 17 2009)
+## Python code generated with wxFormBuilder (version Mar 19 2012)
 ## http://www.wxformbuilder.org/
 ##
 ## PLEASE DO "NOT" EDIT THIS FILE!
 ###########################################################################
 
 import wx
+import wx.xrc
 
 ###########################################################################
 ## Class MyFrame
@@ -24,24 +25,24 @@ class MyFrame ( wx.Frame ):
 		self.m_menubar1 = wx.MenuBar( 0 )
 		self.menumain = wx.Menu()
 		self.news = wx.MenuItem( self.menumain, wx.ID_ANY, u"新建監控策略"+ u"\t" + u"CTRL+S", wx.EmptyString, wx.ITEM_NORMAL )
-		self.news.SetBitmap( wx.ICON( wx.ArtProvider.GetBitmap(wx.ART_FIND,wx.ART_MENU,(16,16)) ) )
+		self.news.SetBitmap( wx.ArtProvider.GetBitmap( wx.ART_FIND,  ) )
 		self.menumain.AppendItem( self.news )
 		
 		self.newa = wx.MenuItem( self.menumain, wx.ID_ANY, u"新建下單設定"+ u"\t" + u"CTRL+A", wx.EmptyString, wx.ITEM_NORMAL )
-		self.newa.SetBitmap( wx.ICON( wx.ArtProvider.GetBitmap(wx.ART_NEW,wx.ART_MENU,(16,16)) ) )
+		self.newa.SetBitmap( wx.ArtProvider.GetBitmap( wx.ART_NEW,  ) )
 		self.menumain.AppendItem( self.newa )
 		
 		self.menumain.AppendSeparator()
 		
 		self.quit = wx.MenuItem( self.menumain, wx.ID_ANY, u"離開"+ u"\t" + u"CTRL+X", wx.EmptyString, wx.ITEM_NORMAL )
-		self.quit.SetBitmap( wx.ICON( wx.ArtProvider.GetBitmap(wx.ART_QUIT,wx.ART_MENU,(16,16)) ) )
+		self.quit.SetBitmap( wx.ArtProvider.GetBitmap( wx.ART_QUIT,  ) )
 		self.menumain.AppendItem( self.quit )
 		
 		self.m_menubar1.Append( self.menumain, u"新建" ) 
 		
 		self.menuabout = wx.Menu()
 		self.about = wx.MenuItem( self.menuabout, wx.ID_ANY, u"關於這個軟體", wx.EmptyString, wx.ITEM_NORMAL )
-		self.about.SetBitmap( wx.ICON( wx.ArtProvider.GetBitmap(wx.ART_HELP,wx.ART_MENU,(16,16)) ) )
+		self.about.SetBitmap( wx.ArtProvider.GetBitmap( wx.ART_HELP_PAGE,  ) )
 		self.menuabout.AppendItem( self.about )
 		
 		self.m_menubar1.Append( self.menuabout, u"關於" ) 
@@ -62,6 +63,7 @@ class MyFrame ( wx.Frame ):
 		
 		sbSizer8.Add( self.sctrl, 1, wx.ALL|wx.EXPAND, 5 )
 		
+		
 		bSizer20.Add( sbSizer8, 1, wx.EXPAND, 5 )
 		
 		sbSizer9 = wx.StaticBoxSizer( wx.StaticBox( self, wx.ID_ANY, u"系統紀錄" ), wx.VERTICAL )
@@ -69,9 +71,12 @@ class MyFrame ( wx.Frame ):
 		self.log = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.TE_MULTILINE|wx.TE_READONLY )
 		sbSizer9.Add( self.log, 1, wx.ALL|wx.EXPAND, 5 )
 		
+		
 		bSizer20.Add( sbSizer9, 1, wx.EXPAND, 5 )
 		
+		
 		bSizer16.Add( bSizer20, 1, wx.EXPAND, 5 )
+		
 		
 		vSizer.Add( bSizer16, 5, wx.EXPAND, 5 )
 		
@@ -84,7 +89,9 @@ class MyFrame ( wx.Frame ):
 		
 		sbSizer10.Add( self.actrl, 1, wx.ALL|wx.EXPAND, 5 )
 		
+		
 		bSizer17.Add( sbSizer10, 1, wx.EXPAND, 5 )
+		
 		
 		vSizer.Add( bSizer17, 5, wx.EXPAND, 5 )
 		
@@ -108,6 +115,7 @@ class MyFrame ( wx.Frame ):
 		
 		bSizer19.Add( self.password, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
 		
+		
 		vSizer.Add( bSizer19, 1, wx.EXPAND, 5 )
 		
 		bSizer9 = wx.BoxSizer( wx.HORIZONTAL )
@@ -130,6 +138,7 @@ class MyFrame ( wx.Frame ):
 		
 		bSizer9.Add( self.certpass, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
 		
+		
 		vSizer.Add( bSizer9, 1, wx.EXPAND, 5 )
 		
 		bSizer21 = wx.BoxSizer( wx.HORIZONTAL )
@@ -146,11 +155,14 @@ class MyFrame ( wx.Frame ):
 		self.start = wx.ToggleButton( self, wx.ID_ANY, u"開始下單", wx.DefaultPosition, wx.DefaultSize, 0 )
 		bSizer21.Add( self.start, 0, wx.ALIGN_CENTER|wx.ALIGN_RIGHT|wx.ALL, 5 )
 		
+		
 		vSizer.Add( bSizer21, 1, wx.EXPAND, 5 )
 		
 		self.ocxSizer = wx.BoxSizer( wx.VERTICAL )
 		
+		
 		vSizer.Add( self.ocxSizer, 0, wx.EXPAND, 0 )
+		
 		
 		self.SetSizer( vSizer )
 		self.Layout()
@@ -239,6 +251,7 @@ class MyS ( wx.Dialog ):
 		self.sdelete = wx.Button( self, wx.ID_ANY, u"刪除", wx.DefaultPosition, wx.DefaultSize, 0 )
 		bSizer24.Add( self.sdelete, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
 		
+		
 		self.SetSizer( bSizer24 )
 		self.Layout()
 		
@@ -296,7 +309,7 @@ class MyA ( wx.Dialog ):
 		gSizer1.Add( self.m_staticText10, 0, wx.ALL, 5 )
 		
 		self.acompany = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.acompany.SetToolTipString( u"就是期貨分公司代碼例如 F029000 就是代表康和總公司\n康和\n期貨總公司 F029000\n台南分公司 F029002\n台中分公司 F029003\n日盛\n台北總公司 000" )
+		self.acompany.SetToolTipString( u"請輸入期貨分公司代碼\n\n例如 F029000 就是代表康和總公司\n\n康和\n\n期貨總公司 F029000\n台南分公司 F029002\n台中分公司 F029003\n高雄分公司 F029004\n彰化分公司 F029005\n\n日盛\n\n台北總公司 000\n其他請自行查明" )
 		
 		gSizer1.Add( self.acompany, 0, wx.ALL, 5 )
 		
@@ -314,7 +327,7 @@ class MyA ( wx.Dialog ):
 		gSizer1.Add( self.m_staticText12, 0, wx.ALL, 5 )
 		
 		self.aproduct = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.aproduct.SetToolTipString( u"交易商品的代碼,例如要下康和小台指就填 FIMTX\n康和的例子,交易所的代碼也必須填,其他商品請自行查閱\nFITX   台指期\nFIMTX 小台指\nFITF    金融期\nFITE    電子期\nEC       歐元\nEP       Mini S&P 500\n\n日盛的例子\nTXF     台指期\nMXF     小台指\nFXF      金融期\nEXF      電子期" )
+		self.aproduct.SetToolTipString( u"交易商品的代碼\n\n例如要下康和小台指就填 MXF\n\n康和的例子,交易所的代碼也必須填,其他商品請自行查閱\n\nTXF   台指期\nMXF  小台指\nFXF   金融期\nEXF   電子期\nGTF   櫃買期\nCPF   利率期貨\nT5F   台灣五十\nXIF     非金電期\nTGF   台黃期\nGDF   黃金期\n\n日盛的例子\n\nTXF   台指期\nMXF   小台指\nFXF    金融期\nEXF    電子期" )
 		
 		gSizer1.Add( self.aproduct, 0, wx.ALL, 5 )
 		
@@ -383,6 +396,7 @@ class MyA ( wx.Dialog ):
 		
 		self.adelete = wx.Button( self, wx.ID_ANY, u"刪除", wx.DefaultPosition, wx.DefaultSize, 0 )
 		gSizer1.Add( self.adelete, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
+		
 		
 		self.SetSizer( gSizer1 )
 		self.Layout()

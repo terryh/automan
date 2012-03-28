@@ -7,7 +7,7 @@ import wx
 from wx.lib.wordwrap import wordwrap
 from wxobject import MyFrame,MyS,MyA
 # patch for wxFormBuilder, fake wxICON to nothing but return content
-wx.ICON = lambda a: a
+# wx.ICON = lambda a: a
 
 import cPickle as pickle
 import os
@@ -30,8 +30,8 @@ import comtypes
 app_realpath = os.path.realpath(sys.argv[0])
 app_dir = os.path.dirname(app_realpath)
 
-__version__ = 'V0.3 BETA'
-__DEAD__ = u"201312"
+__version__ = 'V0.4 BETA'
+__DEAD__ = u"201412"
 
 re_dead = re.compile("[0-9]+")
 def loadpickle(datafile=""):
@@ -86,16 +86,24 @@ def gethts():
 
 def getcon():
     progID=""
-    try:  
-        # try version 1 OCX api
-        cc.GetModule( ('{8E4A0C4A-9B62-41D7-B99A-2B48F81D744A}', 1, 0) )
-        progID = 'SGTPOCXAPI.SgtpOcxApiCtrl.1'
-    except WindowsError:
+    #try:  
+    #    # try version 1 OCX api
+    #    cc.GetModule( ('{8E4A0C4A-9B62-41D7-B99A-2B48F81D744A}', 1, 0) )
+    #    progID = 'SGTPOCXAPI.SgtpOcxApiCtrl.1'
+    #except WindowsError:
+    #    pass
+    
+    try:
         # try version 2 OCX api
-        cc.GetModule( ('{D10B2D9E-71D1-49AC-8919-FF5E122E2172}', 2, 0) )
-        progID = 'SGTPOCXAPI.SgtpOcxApiCtrl.2'
+        cc.GetModule( ('{D10B2D9E-71D1-49AC-8919-FF5E122E2172}', 3, 0) )
+        progID = 'SGTPOCXAPI.SgtpOcxApiCtrl.3'
+    except WindowsError:
+        pass
+    try:
+        from comtypes.gen import SGTPOCXAPILib
     except:
-        pass    
+        progID=""
+    
     return progID
 
 # ActiveX control for SgtpOcxApiCtrl
@@ -253,7 +261,8 @@ class Worker(threading.Thread):
                 
                 if broker == u"康和" and self.con:
                     orderstring = cc % (daytrade,cname,cdate,conot,price,confok,lots)
-                    self.win.con.FutureOrder(company,account,orderstring)
+                    res = self.win.con.FutureOrder(company,account,orderstring)
+                    self.loginfo(res)
                 elif broker == u"日盛" and self.hts:
                     # FIXME HTSOrder do not accept unicode 
                     orderstring = hh % (company,account,cname,cdate,lots,ordertype,price,fokiocrod,daytrade)
@@ -301,7 +310,8 @@ class Worker(threading.Thread):
                 
                 if broker == u"康和" and self.con:
                     orderstring = cc % (daytrade,cname,cdate,conot,price,confok,lots)
-                    self.win.con.FutureOrder(company,account,orderstring)
+                    res = self.win.con.FutureOrder(company,account,orderstring)
+                    self.loginfo(res)
                 elif broker == u"日盛" and self.hts:
                     # FIXME HTSOrder do not accept unicode 
                     orderstring = hh % (company,account,cname,cdate,lots,ordertype,price,fokiocrod,daytrade)
@@ -885,7 +895,7 @@ class FF(MyFrame):
         info = wx.AboutDialogInfo()
         info.Name = u"AUTOMAN 康和日盛下單機"
         info.Version = __version__
-        info.Copyright = u"(C) 2011 TerryH"
+        info.Copyright = u"(C) 2012 TerryH"
         info.Description = wordwrap(
             u"此下單機可以下康合及日盛的期貨單，"
             u"目前未支援下國外商品，"

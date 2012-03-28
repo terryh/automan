@@ -29,7 +29,7 @@ opts = {
         }
 
 setup(
-    version = "0.1",
+    version = "0.4",
     author ="TerryH",
     author_email ="terryh.tp@gmail.com",
     name = "AutoMan",
